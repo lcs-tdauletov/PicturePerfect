@@ -9,6 +9,25 @@ import Foundation
 // Global variable to use later in program
 var countOfPhotoArrangementsToBeConsidered = 3
 
+while true {
+    print("How many photo arrangements are we going to examine today?")
+    guard let consideredArrangements = readLine() else {
+        continue
+    }
+    guard let realArrangements = Int(consideredArrangements) else {
+        continue
+    }
+    if realArrangements > 10 || realArrangements < 0 {
+        continue
+    }
+    
+    countOfPhotoArrangementsToBeConsidered = realArrangements
+    break
+    
+}
+
+
+
 // Write a loop to actually collect the number of photo arrangements to be considered
 // e.g.: write the rest of the INPUT section
 
@@ -30,11 +49,23 @@ for counter in 1...countOfPhotoArrangementsToBeConsidered {
         continue
     }
     
-    // What was provided?
-    print("The given input was: \(givenInput)")
+    guard let numberOfPhotos = Int(givenInput) else {
+        continue
+    }
     
     // Implement the rest of your logic here...
-
+    var oneSide = 0
+    var arrayOfSides : [Int] = []
+    for i in 1...numberOfPhotos {
+        if numberOfPhotos % i == 0 {
+            arrayOfSides.append(i)
+            
+        }
+        oneSide = arrayOfSides[(Int(arrayOfSides.count - 1 ) / 2)]
+    }
+    let otherSide = numberOfPhotos / oneSide
+    let perimeter = 2 * otherSide + 2 * oneSide
+    print("Minimum perimeter is \(perimeter) with dimensions \(otherSide) and \(oneSide)")
 
 }
 
